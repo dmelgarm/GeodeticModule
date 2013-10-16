@@ -4,15 +4,15 @@ from numpy import genfromtxt
 #Day to download
 
 #Specific date
-#day=7
-#month=10
-#year=2013
+day=13
+month=10
+year=2013
 
 #Today's date
-now=datetime.date.today()-datetime.timedelta(days=1)
-day=now.day
-year=now.year
-month=now.month
+#now=datetime.date.today()-datetime.timedelta(days=2)
+#day=now.day
+#year=now.year
+#month=now.month
 
 #Generate file structure
 dir='/home/sopac/GM/'
