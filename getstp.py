@@ -5,25 +5,25 @@ Some tools to download geodetic module data from the caltech archive and do some
 batch processing
 '''
 
-def download:
+def download():
     import os, datetime, subprocess
     from numpy import genfromtxt
 
     #Day to download
 
     #Specific date
-    day=13
+    day=20
     month=10
     year=2013
 
     #Today's date
-    #now=datetime.date.today()-datetime.timedelta(days=2)
+    #now=datetime.date.today()-datetime.timedelta(days=1)
     #day=now.day
     #year=now.year
     #month=now.month
 
     #Generate file structure
-    dir='/home/sopac/GM/'
+    dir='/Users/dmelgarm/scripts/Python/GM/'
     stas=genfromtxt(dir+'info/stalist.txt',dtype='str')
     #What day of year are we working on
     doy=datetime.date(year,month,day).strftime('%j')
