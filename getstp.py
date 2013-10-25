@@ -12,7 +12,7 @@ def download():
     #Day to download
 
     #Specific date
-    day=20
+    day=19
     month=10
     year=2013
 
@@ -45,6 +45,7 @@ def download():
         print 'STP '+stp
         pdata=subprocess.Popen('AIST2stp',stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         s='''v
+gain on
 %s
 quit''' % stp
         out,err=pdata.communicate(s)
