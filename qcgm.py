@@ -38,7 +38,7 @@ def psd(tr,NF=256,nover=128,Fsample=1):
     from obspy.signal.spectral_estimation import fft_taper
     from matplotlib.mlab import psd as mpsd
     from matplotlib.pylab import detrend_linear
-    P,f=mpsd(tr.data,NFFT=NF,Fs=1,detrend=detrend_linear,window=fft_taper,noverlap=nover,
+    P,f=mpsd(tr.data,NFFT=NF,Fs=Fsample,detrend=detrend_linear,window=fft_taper,noverlap=nover,
             pad_to=None,sides='onesided',scale_by_freq=True)
     # leave out first entry (offset)
     P = P[1:]
