@@ -1,0 +1,7 @@
+#!/bin/bash
+
+start=`date`
+python -c 'import getqc ; getqc.doall_1day(12,10,2013,download=False,qc=False,plot=False,www=True)'
+endt=`date`
+echo Run started at $start
+echo ... and it ended at $endt

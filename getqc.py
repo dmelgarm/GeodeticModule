@@ -30,6 +30,33 @@ def batchqc():
             varplot=False,
             specplot=True)
             
+            
+            
+def doall_1day(day=0,month=0,year=0,download=True,qc=True,plot=True,www=True):
+    '''
+    Do everything for one day
+    '''
+    
+    import getstp,datetime
+    
+    if day==0: #Download yesterday
+        now=datetime.date.today()-datetime.timedelta(days=1)
+        day=now.day
+        year=now.year
+        month=now.month
+    if download:
+        getstp.download(day,month,year,reset=False)
+    if qc:
+        qc(day,month,year,dovar=True,dopsd=True,doppsd=True,reset=False)
+    if plot:
+        qcplots(day,month,year,
+            reset=False,
+            dataplot=True,
+            varplot=True,
+            specplot=True)
+    if www:
+        serve1day(day,month,year)
+        
 #-------------------------------------------------------------------------------
 
 
@@ -221,7 +248,7 @@ def qcplots(day,month,year,
                 ax=pl.figure(1).axes[0]
                 pl.sca(ax)
                 #Add days PSD
-                pl.semilogx(T,10*log10(P),color='black',linewidth=2,alpha=0.8)
+                pl.semilogx(T,10*log10(P),color='black',linewidth=1,alpha=0.8)
                 #Change percentiles
                 pl.setp(ax.lines[0:5],linestyle='--',linewidth=2.5,color='black',alpha=0.7)
                 #Set limits
@@ -247,6 +274,8 @@ def serve1day(day,month,year):
     '''
     Update site with data from one particular day
     '''
+    
+    print '..www.. building webpage'
     #Update index
     addday2index(day,month,year)   
     #Make site pages and link to index
@@ -261,6 +290,7 @@ def addday2index(day,month,year):
     
     import datetime
     
+    print '..www.. adding day to index'
     doy=datetime.date(year,month,day).strftime('%j')
     indexpage='/var/www/index.html'
     #Read in template web page and replace patterns
@@ -301,6 +331,7 @@ def linkdaypages(day,month,year):
     
     from numpy import genfromtxt
     
+    print '..www.. creating and linking station pages'
     stationlist=home+'info/'+'stalist.txt'
     stas=genfromtxt(stationlist,dtype='str')
     for k in range(len(stas)):

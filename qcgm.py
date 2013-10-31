@@ -14,9 +14,8 @@ Things in this toolbox:
 
 #Global variables and statements
 import getqc
-from obspy.signal.spectral_estimation import fft_taper
 home=getqc.home
-gpsgain=1e6 #Because at SCEDC it is stored in micrometers (I know right?)
+#-------------------------------------------------------------------------------
 
 
 def psd(tr,NF=256,nover=128,Fsample=1):
@@ -49,25 +48,6 @@ def psd(tr,NF=256,nover=128,Fsample=1):
     #Output and dones
     return T,P
     
-    
-def gpsdrops(tr):
-    '''
-    Calcualte # of dropouts in a sac file
-    
-    Usage:
-        d=drops(fname)
-        
-    parameters:
-        st - ObsPy stream object with data
-        d - number of dropouts
-    '''
-    import numpy as np
-    #Get data
-    data=tr.data
-    #Compute dropouts
-    d=data.shape[0]-np.count_nonzero(np.diff(data))
-    #Return result and exit
-    return d
 
 def getppsd(tr):
     '''
@@ -105,6 +85,26 @@ def getppsd(tr):
     fid=open(pname,'wb')
     cPickle.dump(P,fid)
     fid.close()
+    
+    
+def gpsdrops(tr):
+    '''
+    Calcualte # of dropouts in a sac file
+    
+    Usage:
+        d=drops(fname)
+        
+    parameters:
+        st - ObsPy stream object with data
+        d - number of dropouts
+    '''
+    import numpy as np
+    #Get data
+    data=tr.data
+    #Compute dropouts
+    d=data.shape[0]-np.count_nonzero(np.diff(data))
+    #Return result and exit
+    return d
     
     
 def accdrops(tr):

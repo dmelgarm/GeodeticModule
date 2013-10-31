@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#Where are the GM codes?
-gmpath=/home/sopac/GM/src
-
-#Get the data from Caltech
-python ${gmpath}/getstp.py
+start=`date`
+python -c 'import getqc ; getqc.doall_1day(13,10,2013,download=False,qc=False,plot=False,www=True)'
+endt=`date`
+echo Run started at $start
+echo ... and it ended at $endt
